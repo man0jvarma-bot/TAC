@@ -1,91 +1,84 @@
 "use client";
-
-import { ArrowRight, MessageSquare, Briefcase, HeartHandshake } from "lucide-react";
+import React from "react";
+import { ArrowRight, MessageSquare, Briefcase, HeartHandshake, Sparkles } from "lucide-react";
 
 const admissionSteps = [
   {
     number: "01",
     title: "Discovery Call",
-    icon: <MessageSquare className="w-4 h-4" />,
-    description: "A conversation to assess your background, intent, and career aspirations."
+    icon: <MessageSquare size={16} />,
+    description: "Assessing your background, intent, and career aspirations."
   },
   {
     number: "02",
     title: "Business Case",
-    icon: <Briefcase className="w-4 h-4" />,
-    description: "Work through a real-world case to showcase strategic problem-solving skills."
+    icon: <Briefcase size={16} />,
+    description: "Showcasing strategic problem-solving through a real-world case."
   },
   {
     number: "03",
     title: "Culture Fit",
-    icon: <HeartHandshake className="w-4 h-4" />,
-    description: "Ensuring alignment with our high-standard, execution-heavy environment."
+    icon: <HeartHandshake size={16} />,
+    description: "Ensuring alignment with our execution-heavy studio environment."
   }
 ];
 
 export default function AdmissionCriteria() {
   return (
-    <section className="relative overflow-hidden bg-[#1D1D1D] py-20 md:py-24">
-      
-      {/* Background Subtle Glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-[#FFC62A]/5 rounded-full blur-[120px]" />
-      </div>
+    <section className="py-16 px-[5%] bg-[#FCF8E3] text-[#1D1D1D] overflow-hidden border-y border-black/5">
+      <div className="max-w-7xl mx-auto">
 
-      <div className="relative z-10 w-full px-[5%]">
-        
-        {/* Header Block - Reduced Margin */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black text-[#FBF8E4] leading-tight mb-4">
-            Admission <span className="italic font-serif text-[#FFC62A]">Criteria</span>
+        {/* Compact Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-black/10 bg-black/5">
+            <Sparkles size={10} className="text-[#1D1D1D]" />
+            <span className="text-[9px] tracking-[0.3em] uppercase font-bold text-[#1D1D1D]">Admission Flow</span>
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-tighter mb-2">
+            Selection <span className="italic font-serif text-[#FFC62A]">Criteria.</span>
           </h2>
-          <p className="text-[#FBF8E4]/40 text-sm md:text-base max-w-xl mx-auto">
-            A selective process to identify the next generation of revenue operators.
-          </p>
         </div>
 
-        {/* Adjusted Process Flow */}
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-stretch justify-between gap-4 lg:gap-0">
-          
+        {/* Process Flow with Indicators */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
           {admissionSteps.map((step, index) => (
-            <div key={index} className="flex flex-col lg:flex-row items-center flex-1 group">
-              
-              {/* Box - Balanced Width and Height */}
-              <div className="w-full bg-white/[0.03] border border-[#FBF8E4]/10 rounded-[2rem] p-7 md:p-9 transition-all duration-500 hover:bg-white/[0.06] hover:border-[#FFC62A]/30 flex-1 flex flex-col justify-between min-h-[240px]">
+            <React.Fragment key={index}>
+              {/* Compact Box */}
+              <div className="w-full bg-white/60 border border-black/5 rounded-[2rem] p-7 transition-all duration-500 hover:bg-[#365C47] hover:shadow-xl flex-1 flex flex-col justify-between min-h-[200px] cursor-default group">
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-[#FFC62A]/10 flex items-center justify-center text-[#FFC62A]">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#1D1D1D] flex items-center justify-center text-[#FFC62A] group-hover:bg-white group-hover:text-[#365C47] transition-all duration-300">
                       {step.icon}
                     </div>
-                    <span className="text-lg font-black text-[#FBF8E4]/10 group-hover:text-[#FFC62A]/20 transition-colors">
-                      {step.number}
+                    <span className="text-xs font-bold text-black/10 group-hover:text-white/10 transition-colors">
+                      Step {step.number}
                     </span>
                   </div>
 
-                  <h3 className="text-lg md:text-xl font-bold text-[#FBF8E4] mb-3 group-hover:text-[#FFC62A] transition-colors tracking-tight">
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-white transition-colors tracking-tight">
                     {step.title}
                   </h3>
-                  
-                  <p className="text-[#FBF8E4]/40 text-xs md:text-sm leading-relaxed">
+
+                  <p className="text-gray-500 text-xs leading-relaxed font-medium group-hover:text-white/70 transition-colors">
                     {step.description}
                   </p>
                 </div>
 
-                <div className="mt-6 h-0.5 w-8 bg-[#FFC62A]/20 group-hover:w-full group-hover:bg-[#FFC62A] transition-all duration-700" />
+                <div className="mt-4 h-1 w-8 bg-[#FFC62A] rounded-full group-hover:w-full transition-all duration-500" />
               </div>
 
-              {/* Arrow Connector - Precisely Centered */}
+              {/* Arrow Indicator in Spacing */}
               {index !== admissionSteps.length - 1 && (
-                <div className="flex items-center justify-center w-full lg:w-16 h-12 lg:h-auto z-20">
-                  <div className="w-9 h-9 rounded-full border border-[#FBF8E4]/10 bg-[#1D1D1D] flex items-center justify-center text-[#FFC62A] rotate-90 lg:rotate-0 shadow-lg">
-                    <ArrowRight className="w-4 h-4" />
+                <div className="hidden lg:flex items-center justify-center px-4">
+                  <div className="w-8 h-8 rounded-full bg-white border border-black/5 flex items-center justify-center text-[#FFC62A] shadow-sm">
+                    <ArrowRight size={14} />
                   </div>
                 </div>
               )}
-            </div>
+            </React.Fragment>
           ))}
         </div>
-
       </div>
     </section>
   );

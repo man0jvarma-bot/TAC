@@ -1,163 +1,187 @@
 "use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
+import { useRef } from "react";
 import {
-  Video, Palette, Megaphone, Target,
-  Users, Zap, Briefcase, Layout, ArrowRight, Calendar
+  motion,
+  useScroll,
+  useTransform,
+  useSpring
+} from "framer-motion";
+import { 
+  BookOpen, 
+  Wrench, 
+  LineChart, 
+  Mic, 
+  CheckCircle2, 
+  TrendingUp, 
+  Layers 
 } from "lucide-react";
 
-const courses = [
-  { id: 1, title: "Editing", icon: <Video />, heading: "Cinematic Storytelling", points: ["Narrative Pacing", "Color Grading", "Sound Design", "Multi-cam"] },
-  { id: 2, title: "Motion", icon: <Zap />, heading: "After Effects & VFX", points: ["Keyframe Theory", "Lottie/Web", "Compositing", "Dynamic Branding"] },
-  { id: 3, title: "Visuals", icon: <Palette />, heading: "Brand Identity", points: ["Layout Systems", "Typography", "Vector Art", "Illustrator Mastery"] },
-  { id: 4, title: "UI/UX", icon: <Layout />, heading: "Product Design", points: ["Figma Systems", "Wireframing", "Responsive UI", "Usability Testing"] },
-  { id: 5, title: "Ads", icon: <Megaphone />, heading: "Performance Marketing", points: ["Meta Manager", "Creative Testing", "CRO Strategy", "Scaling Budgets"] },
-  { id: 6, title: "Clients", icon: <Users />, heading: "High-Ticket Sales", points: ["Closing Logic", "Stakeholder Comm", "Project Scoping", "Retainers"] },
-  { id: 7, title: "GTM", icon: <Target />, heading: "Market Execution", points: ["Growth Funnels", "PLG Strategy", "Market Analysis", "KPI Mapping"] },
-  { id: 8, title: "Career", icon: <Briefcase />, heading: "The Placement", points: ["Pitch Simulations", "Portfolio Proof", "Personal Branding", "Referrals"] },
+const cards = [
+  {
+    tag: "Phase 01 — Foundation",
+    title: "Master The",
+    highlight: "Systems.",
+    description: "Before execution comes architecture. Master the structured frameworks across marketing, behavioral psychology, and revenue systems.",
+    points: ["Consumer Psychology", "Offer Architecture", "Market Positioning"],
+    advantage: "Develop the strategic mind of a Creative Director.",
+    tools: "Miro • Notion • Market Intelligence",
+    icon: BookOpen,
+  },
+  {
+    tag: "Phase 02 — Simulation",
+    title: "Build The",
+    highlight: "Execution.",
+    description: "Theory ends here. Collaborate in elite teams to execute real-world business simulations. Engage in hands-on tool experimentation.",
+    points: ["Advanced UI/UX", "Cinematic Editing", "Conversion Copywriting"],
+    advantage: "Build a premium, client-ready portfolio.",
+    tools: "Figma • Premiere Pro • After Effects",
+    icon: Wrench,
+  },
+  {
+    tag: "Phase 03 — Analytics",
+    title: "Optimize With",
+    highlight: "Data.",
+    description: "Refine your systems using deep analytics, performance metrics, and aggressive A/B testing feedback loops.",
+    points: ["Media Buying", "Funnel Optimization", "Retention Scaling"],
+    advantage: "Scale campaigns strictly on mathematical ROI.",
+    tools: "Meta Ads • Google Analytics • Hotjar",
+    icon: LineChart,
+  },
+  {
+    tag: "Phase 04 — Validation",
+    title: "Pitch To",
+    highlight: "Founders.",
+    description: "Skip the cold applications. Present your final, polished solutions directly to industry leaders and startup founders.",
+    points: ["Executive Comm", "Live Pitching", "Negotiation Frameworks"],
+    advantage: "Secure placements through our 50+ partner network.",
+    tools: "Pitch Decks • Case Studies • Networking",
+    icon: Mic,
+  }
 ];
 
-export default function InteractiveTacSuite() {
-  const [active, setActive] = useState(1);
-  const selected = courses.find((c) => c.id === active);
+export default function TacExecutionPipeline() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   return (
-    <section className="py-24 px-[5%] bg-[#FFF9E6] text-black overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
-
-        {/* CENTERED HEADING SECTION */}
-        <div className="text-center mb-16 flex flex-col items-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black text-black tracking-tighter leading-[0.85] uppercase"
-          >
-            The Suite
-            <span className="block font-serif italic font-light text-[#365c47] lowercase mt-2">
-              Built for the next generation
-            </span>
-          </motion.h2>
-
-          {/* GLASSY DURATION BOX */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            className="mt-8 px-5 py-2.5 bg-white/40 backdrop-blur-md border border-white rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.03)] flex items-center gap-3"
-          >
-            <div className="w-2 h-2 rounded-full bg-[#FFC62A] animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/60">
-              Duration : <span className="text-black">6 Months Immersion</span>
-            </span>
-          </motion.div>
-
-          <p className="mt-8 max-w-xl mx-auto text-[#111111]/60 text-base md:text-lg font-medium leading-relaxed">
-            A deep-dive curriculum designed to transform creative talent into industry-ready leaders.
-          </p>
+    <section className="bg-[#FCF8E3] font-sans">
+      
+      {/* Header */}
+      <div className="w-full text-center px-[5%] pt-32 pb-16">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/5 border border-black/10 mb-6">
+          <Layers className="w-4 h-4 text-[#1D1D1D]" />
+          <span className="text-[10px] tracking-[0.2em] uppercase font-bold text-[#1D1D1D]">
+            Our Methodology
+          </span>
         </div>
+        <h2 className="text-4xl md:text-6xl font-semibold text-[#1D1D1D] tracking-tighter leading-[1.05]">
+          The Execution <br />
+          <span className="font-serif italic font-medium text-[#FFC62A] tracking-normal">
+            Pipeline.
+          </span>
+        </h2>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-8 items-stretch">
+      <div ref={sectionRef} className="relative h-[400vh]">
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-[5%]">
 
-          {/* MAIN CONTENT CARD */}
-          <div className="relative order-2 lg:order-1 h-full">
-            <AnimatePresence mode="wait">
+          {cards.map((card, index) => {
+            const step = 1 / cards.length;
+            const start = index * step;
+            const end = (index + 1) * step;
+
+            // Natural exit: Shrink and Fade to Left
+            const x = useTransform(smoothProgress, [start, end], ["0vw", "-100vw"]);
+            const opacity = useTransform(smoothProgress, [start, start + 0.1, end - 0.1, end], [0, 1, 1, 0]);
+            const scale = useTransform(smoothProgress, [start, end], [1, 0.7]);
+            const rotate = useTransform(smoothProgress, [start, end], [0, -5]);
+            const filter = useTransform(smoothProgress, [start, end], ["blur(0px)", "blur(10px)"]);
+
+            return (
               <motion.div
-                key={active}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                className="bg-white rounded-[40px] p-8 md:p-14 h-full shadow-[0_40px_100px_rgba(0,0,0,0.04)] border border-white flex flex-col justify-between relative overflow-hidden"
+                key={index}
+                style={{
+                  x,
+                  opacity,
+                  scale,
+                  rotate,
+                  filter,
+                  zIndex: cards.length - index,
+                }}
+                className="absolute w-full max-w-[1100px] h-[500px] md:h-[600px]
+                           bg-white border border-black/5 rounded-[3rem] 
+                           shadow-[0_40px_100px_rgba(0,0,0,0.04)]
+                           overflow-hidden flex flex-col justify-center"
               >
-                {/* Background Decor Icon */}
-                <div className="absolute top-0 right-0 p-10 opacity-[0.03] rotate-12 scale-[4] pointer-events-none">
-                  {selected?.icon}
-                </div>
+                <div className="relative z-10 px-8 py-10 md:px-16 md:py-0 flex flex-col md:flex-row gap-8 md:gap-12 items-center h-full">
+                  
+                  {/* Left Side */}
+                  <div className="flex-1 w-full flex flex-col justify-center">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-12 h-12 rounded-xl bg-[#1D1D1D] flex items-center justify-center text-[#FFC62A] shadow-sm">
+                        <card.icon className="w-6 h-6" />
+                      </div>
+                      <span className="inline-block px-4 py-1.5 text-[10px] font-bold tracking-[0.2em] uppercase rounded-full bg-black/5 text-gray-500 border border-black/5">
+                        {card.tag}
+                      </span>
+                    </div>
 
-                <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-8">
-                    <span className="w-10 h-10 rounded-full bg-black text-[#FFC62A] flex items-center justify-center font-black text-sm shadow-lg">
-                      0{selected?.id}
-                    </span>
-                    <span className="text-black/30 uppercase font-black tracking-widest text-[10px]">Strategic Focus</span>
-                  </div>
+                    <h3 className="text-4xl md:text-5xl font-semibold text-[#1D1D1D] tracking-tighter leading-[1.05] mb-6">
+                      {card.title} <br />
+                      <span className="font-serif italic font-medium text-[#FFC62A] tracking-normal">
+                        {card.highlight}
+                      </span>
+                    </h3>
 
-                  <h3 className="text-4xl md:text-6xl font-black tracking-tighter mb-10 leading-none uppercase">
-                    {selected?.heading}
-                  </h3>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
-                    {selected?.points.map((point, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        className="flex items-center gap-4 group cursor-default"
-                      >
-                        <div className="w-6 h-6 rounded-md bg-[#FFF9E6] border border-black/5 flex items-center justify-center text-black transition-colors group-hover:bg-[#FFC62A]">
-                          <ArrowRight size={12} />
-                        </div>
-                        <span className="text-lg font-bold text-black/70 tracking-tight">{point}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-12 pt-8 border-t border-black/5 flex flex-wrap justify-between items-center gap-4 relative z-10">
-                  <div className="flex flex-col">
-                    <span className="text-[9px] font-black uppercase tracking-widest text-black/30 mb-1">Standard</span>
-                    <p className="text-xs font-bold text-black/60 uppercase tracking-widest leading-relaxed">
-                      Certification 2026
+                    <p className="text-gray-500 text-base md:text-lg max-w-xl leading-relaxed font-medium">
+                      {card.description}
                     </p>
                   </div>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-black text-[#FFC62A] px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest shadow-xl hover:shadow-[#FFC62A]/10 transition-shadow"
-                  >
-                    Download Syllabus
-                  </motion.button>
+
+                  {/* Right Side */}
+                  <div className="flex-1 w-full flex flex-col justify-center border-t md:border-t-0 md:border-l border-black/5 pt-6 md:pt-0 md:pl-12">
+                    <div className="mb-8">
+                      <p className="text-[10px] font-bold text-gray-300 uppercase tracking-widest mb-4">Core Focus</p>
+                      <div className="space-y-4">
+                        {card.points.map((point, i) => (
+                          <div key={i} className="flex items-start gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-[#365c47] flex-shrink-0" />
+                            <span className="text-[#1D1D1D] font-semibold text-sm md:text-base">{point}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 bg-[#FCF8E3] p-6 rounded-2xl border border-black/5">
+                      <div className="flex items-start gap-2">
+                        <TrendingUp className="w-5 h-5 text-[#FFC62A] flex-shrink-0" />
+                        <p className="text-[#1D1D1D] font-bold text-sm leading-tight">
+                          {card.advantage}
+                        </p>
+                      </div>
+                      <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest pt-3 border-t border-black/5">
+                        Stack: {card.tools}
+                      </p>
+                    </div>
+                  </div>
+
                 </div>
               </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* NAVIGATION GRID */}
-          <div className="grid grid-cols-2 gap-3 order-1 lg:order-2">
-            {courses.map((course) => (
-              <motion.button
-                key={course.id}
-                onClick={() => setActive(course.id)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`relative flex flex-col items-start justify-between p-6 rounded-[32px] transition-all duration-500 text-left border-2
-                  ${active === course.id
-                    ? "bg-black border-black text-[#FFC62A] shadow-2xl"
-                    : "bg-white/40 border-white text-black/40 hover:bg-white hover:text-black hover:border-black/10"
-                  }`}
-              >
-                <div className={`p-3 rounded-xl transition-colors ${active === course.id ? "bg-white/10" : "bg-black/5"}`}>
-                  {React.cloneElement(course.icon as React.ReactElement<any>, { size: 20 })}
-                </div>
-
-                <div className="mt-6">
-                  <span className="block text-[8px] font-black uppercase tracking-[0.2em] mb-1 opacity-50">Module 0{course.id}</span>
-                  <span className="text-[13px] font-black uppercase tracking-tight leading-none">{course.title}</span>
-                </div>
-
-                {active === course.id && (
-                  <motion.div
-                    layoutId="activeTabGlow"
-                    className="absolute inset-0 rounded-[32px] ring-2 ring-black ring-offset-2 pointer-events-none"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-              </motion.button>
-            ))}
-          </div>
-
+            );
+          })}
         </div>
       </div>
     </section>
   );
-} 
+}

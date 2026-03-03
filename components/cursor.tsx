@@ -75,7 +75,7 @@ export default function GlobalCursor() {
           translateY: "-50%",
         }}
       />
-      
+
       {/* Global CSS to hide the default cursor on the whole site */}
       <style jsx global>{`
         html, body, a, button, * {
